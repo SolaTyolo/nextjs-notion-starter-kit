@@ -124,6 +124,12 @@ export const fathomConfig = fathomId
     }
   : undefined
 
+  export const baiduConfig = baiduId
+  ? {
+      excludedDomains: ['localhost', 'localhost:3000']
+    }
+  : undefined
+
 const defaultEnvValueForPreviewImageSupport =
   isPreviewImageSupportEnabled && isServer ? undefined : null
 

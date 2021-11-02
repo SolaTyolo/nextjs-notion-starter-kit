@@ -35,11 +35,10 @@ import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-bash'
 
 import React from 'react'
-import { Head } from 'next/document';
 import { useRouter } from 'next/router'
 import { bootstrap } from 'lib/bootstrap-client'
-import { fathomId, fathomConfig, baiduId } from 'lib/config'
-import * as Fathom from 'fathom-client'
+import {  baiduId, baiduConfig } from 'lib/config'
+import * as BaiduAnalyClient  from 'api/baidu-analytics'
 
 if (typeof window !== 'undefined') {
   bootstrap()
@@ -48,27 +47,15 @@ if (typeof window !== 'undefined') {
 export default function App({ Component, pageProps }) {
   const router = useRouter()
 
-  const baiduAnalytics = ( baiduId: string ) => {
-    if(baiduId) {
-      return {
-        __html: `
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?${baiduId}";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();`,
-      }
-    }
-  }
-
   React.useEffect(() => {
-    if (fathomId) {
-      Fathom.load(fathomId, fathomConfig)
+    if (baiduId) {
+      // Fathom.load(fathomId, fathomConfig)
+      BaiduAnalyClient.load(baiduId, baiduConfig)
+
 
       function onRouteChangeComplete() {
-        Fathom.trackPageview()
+        // Fathom.trackPageview()
+        BaiduAnalyClient.trackPageview()
       }
 
       router.events.on('routeChangeComplete', onRouteChangeComplete)
@@ -80,11 +67,6 @@ export default function App({ Component, pageProps }) {
   }, [])
 
   return (
-    <>
-      <Head>
-        <script dangerouslySetInnerHTML={baiduAnalytics(baiduId)}/>
-      </Head>
       <Component {...pageProps} />
-    </>
   )
 }
