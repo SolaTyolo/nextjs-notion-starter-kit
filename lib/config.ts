@@ -39,6 +39,7 @@ export const pageUrlAdditions = cleanPageUrlMap(
 // general site config
 export const name: string = getSiteConfig('name')
 export const author: string = getSiteConfig('author')
+export const icp: string = getSiteConfig('icp')
 export const domain: string = getSiteConfig('domain')
 export const description: string = getSiteConfig('description', 'Notion Blog')
 
@@ -46,6 +47,8 @@ export const description: string = getSiteConfig('description', 'Notion Blog')
 export const twitter: string | null = getSiteConfig('twitter', null)
 export const github: string | null = getSiteConfig('github', null)
 export const linkedin: string | null = getSiteConfig('linkedin', null)
+export const dev: string | null = getSiteConfig('dev', null)
+export const medium: string | null = getSiteConfig('medium', null)
 
 export const socialImageTitle: string | null = getSiteConfig(
   'socialImageTitle',
