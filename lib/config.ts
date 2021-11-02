@@ -79,6 +79,11 @@ export const utterancesGitHubRepo: string | null = getSiteConfig(
   null
 )
 
+export const baiduAnalyticsId: string | null = getSiteConfig(
+  'baiduAnalyticsId',
+  null
+)
+
 // Optional image CDN host to proxy all image requests through
 export const imageCDNHost: string | null = getSiteConfig('imageCDNHost', null)
 
@@ -116,15 +121,7 @@ export const api = {
 
 export const fathomId = isDev ? null : process.env.NEXT_PUBLIC_FATHOM_ID
 
-export const baiduId = getEnv('BAIDU_ANALYTICS_ID')
-
 export const fathomConfig = fathomId
-  ? {
-      excludedDomains: ['localhost', 'localhost:3000']
-    }
-  : undefined
-
-  export const baiduConfig = baiduId
   ? {
       excludedDomains: ['localhost', 'localhost:3000']
     }

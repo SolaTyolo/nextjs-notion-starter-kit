@@ -42,44 +42,9 @@ interface BaiduAnaly {
     window._hmt = window._hmt || [];
   };
   
-  /**
-   * Loops through list of domains and warns if they start with
-   * http, https, http://, etc... as this does not work with the
-   * baiduAnaly script.
-   *
-   * @param domains - List of domains to check
-   */
-  const checkDomainsAndWarn = (domains: string[]): void => {
-    const regex = /(https?)(?=:|\/|$)/; // matches http or https followed by
-    // either a : or /
-    domains.forEach(domain => {
-      if (regex.exec(domain) !== null)
-        console.warn(
-          `The include domain ${domain} might fail to work as intended as it begins with a transfer protocol (http://, https://). Consider removing the protocol portion of the string.`
-        );
-    });
-  };
-  
   export const load = (siteId: string, opts?: LoadOptions): void => {
-    let tracker = document.createElement('script');
-  
-    tracker.id = 'baidu-script';
-    tracker.async = true;
-    tracker.setAttribute('data-site', siteId);
-    tracker.src =
-      opts && opts.url ? opts.url : `https://hm.baidu.com/hm.js?${siteId}`;
-    if (opts) {
-      if (opts.auto !== undefined) tracker.setAttribute('data-auto', `${opts.auto}`);
-      if (opts.includedDomains) {
-        checkDomainsAndWarn(opts.includedDomains);
-        tracker.setAttribute('data-included-domains', opts.includedDomains.join(','));
-      }
-      if (opts.excludedDomains) {
-        checkDomainsAndWarn(opts.excludedDomains);
-        tracker.setAttribute('data-excluded-domains', opts.excludedDomains.join(','));
-      }
-      if (opts.spa) tracker.setAttribute('data-spa', opts.spa);
-    }
+    let tracker = document.createElement('script');  
+    tracker.src =`https://hm.baidu.com/hm.js?${siteId}`;
     let s = document.getElementsByTagName('script')[0];
     tracker.onload = flushQueue;
     s.parentNode.insertBefore(tracker, s);
