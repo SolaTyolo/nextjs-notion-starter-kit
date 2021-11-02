@@ -51,15 +51,11 @@ export default function App({ Component, pageProps }) {
     if (baiduId) {
       // Fathom.load(fathomId, fathomConfig)
       BaiduAnalyClient.load(baiduId, baiduConfig)
-
-
       function onRouteChangeComplete() {
         // Fathom.trackPageview()
-        BaiduAnalyClient.trackPageview()
+        BaiduAnalyClient.trackPageview({url: router.route})
       }
-
       router.events.on('routeChangeComplete', onRouteChangeComplete)
-
       return () => {
         router.events.off('routeChangeComplete', onRouteChangeComplete)
       }

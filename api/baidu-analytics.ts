@@ -1,6 +1,5 @@
 interface BaiduAnaly {
     trackPageview: (opts?: PageViewOptions) => void;
-    trackGoal: (code: string, cents: number) => void;
   }
   
   export type PageViewOptions = {
@@ -18,12 +17,11 @@ interface BaiduAnaly {
   
   type BaiduCommand =
     | { type: 'trackPageview'; opts: PageViewOptions | undefined }
-    | { type: 'trackGoal'; code: string; cents: number };
   
   declare global {
     interface Window {
       baiduAnaly?: BaiduAnaly;
-      _hmt: BaiduCommand[];
+      _hmt: string[][];
     }
   }
   
@@ -34,7 +32,7 @@ interface BaiduAnaly {
    */
   const enqueue = (command: BaiduCommand): void => {
     window._hmt = window._hmt || [];
-    window._hmt.push(command);
+    window._hmt.push([ command.type, command.opts.url ]);
   };
   
   /**
@@ -42,22 +40,6 @@ interface BaiduAnaly {
    */
   const flushQueue = (): void => {
     window._hmt = window._hmt || [];
-    window._hmt.forEach(command => {
-      switch (command.type) {
-        case 'trackPageview':
-          if (command.opts) {
-            window.baiduAnaly.trackPageview(command.opts);
-          } else {
-            window.baiduAnaly.trackPageview();
-          }
-          return;
-  
-        case 'trackGoal':
-          window.baiduAnaly.trackGoal(command.code, command.cents);
-          return;
-      }
-    });
-    window._hmt = [];
   };
   
   /**
@@ -109,27 +91,6 @@ interface BaiduAnaly {
    * @param opts - An optional `url` or `referrer` to override auto-detected values.
    */
   export const trackPageview = (opts?: PageViewOptions): void => {
-    if (window.baiduAnaly) {
-      if (opts) {
-        window.baiduAnaly.trackPageview(opts);
-      } else {
-        window.baiduAnaly.trackPageview();
-      }
-    } else {
       enqueue({ type: 'trackPageview', opts });
-    }
   };
   
-  /**
-   * Tracks a goal.
-   *
-   * @param code - The goal ID.
-   * @param cents - The value in cents.
-   */
-  export const trackGoal = (code: string, cents: number) => {
-    if (window.baiduAnaly) {
-      window.baiduAnaly.trackGoal(code, cents);
-    } else {
-      enqueue({ type: 'trackGoal', code, cents });
-    }
-  };
