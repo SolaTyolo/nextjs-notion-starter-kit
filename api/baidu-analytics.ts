@@ -16,7 +16,7 @@ interface BaiduAnaly {
   };
   
   type BaiduCommand =
-    | { type: 'trackPageview'; opts: PageViewOptions | undefined }
+    | { type: '_trackPageview'; opts: PageViewOptions | undefined }
   
   declare global {
     interface Window {
@@ -91,6 +91,6 @@ interface BaiduAnaly {
    * @param opts - An optional `url` or `referrer` to override auto-detected values.
    */
   export const trackPageview = (opts?: PageViewOptions): void => {
-      enqueue({ type: 'trackPageview', opts });
+      enqueue({ type: '_trackPageview', opts });
   };
   
