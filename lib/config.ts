@@ -116,6 +116,8 @@ export const api = {
 
 export const fathomId = isDev ? null : process.env.NEXT_PUBLIC_FATHOM_ID
 
+export const baiduId = isDev ? null : process.env.BAIDU_ANALYTICS_ID
+
 export const fathomConfig = fathomId
   ? {
       excludedDomains: ['localhost', 'localhost:3000']

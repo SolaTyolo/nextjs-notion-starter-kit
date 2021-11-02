@@ -18,7 +18,7 @@
 
 # Optional (for fathom analytics)
 #NEXT_PUBLIC_FATHOM_ID=
-#BAIDU_ANALYTICS_ID=
+BAIDU_ANALYTICS_ID=530e3822b0fd717cd826ac0af2372bfb
 
 # Optional (for rendering tweets efficiently)
 TWITTER_ACCESS_TOKEN=
