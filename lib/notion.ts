@@ -7,7 +7,8 @@ import pMap from 'p-map'
 
 export const notion = new NotionAPI({
   apiBaseUrl: process.env.NOTION_API_BASE_URL,
-  authToken: process.env.NOTION_TOKEN
+  authToken: process.env.NOTION_TOKEN,
+  userTimeZone: 'Asia/Shanghai'
 })
 
 export async function getPage(pageId: string): Promise<ExtendedRecordMap> {

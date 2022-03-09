@@ -17,9 +17,11 @@ export async function getAllPagesImpl(
   const pageMap = await getAllPagesInSpace(
     rootNotionPageId,
     rootNotionSpaceId,
-    notion.getPage.bind(notion)
+    notion.getPage.bind(notion),
+    {
+      concurrency: 2
+    }
   )
-
   const canonicalPageMap = Object.keys(pageMap).reduce(
     (map, pageId: string) => {
       const recordMap = pageMap[pageId]

@@ -10,16 +10,13 @@
     "node": ">=10"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": " NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "deploy": "vercel --prod",
     "deps": "run-s deps:*",
     "deps:update": "[ -z $GITHUB_ACTIONS ] && yarn add notion-client notion-types notion-utils react-notion-x || echo 'Skipping deps:update on CI'",
     "deps:link": "[ -z $GITHUB_ACTIONS ] && yarn link notion-client notion-types notion-utils react-notion-x || echo 'Skipping deps:link on CI'",
-    "analyze": "cross-env ANALYZE=true next build",
-    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
     "test": "run-s test:*",
     "test:lint": "eslint . --fix",
     "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check",
@@ -51,7 +48,6 @@
     "use-dark-mode": "^2.3.1"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^11.1.2",
     "@types/classnames": "^2.3.1",
     "@types/node": "^16.11.2",
     "@types/node-fetch": "^3.0.3",
