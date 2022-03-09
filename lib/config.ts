@@ -49,6 +49,7 @@ export const github: string | null = getSiteConfig('github', null)
 export const linkedin: string | null = getSiteConfig('linkedin', null)
 export const dev: string | null = getSiteConfig('dev', null)
 export const medium: string | null = getSiteConfig('medium', null)
+export const email: string | null = getSiteConfig('email',null)
 
 export const socialImageTitle: string | null = getSiteConfig(
   'socialImageTitle',

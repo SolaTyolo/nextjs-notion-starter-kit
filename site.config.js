@@ -21,8 +21,9 @@ module.exports = {
   twitter: null,  //remove
   github: 'SolaTyolo',
   linkedin: null,   //remove
-  dev: null,
-  medium: null,
+  dev: 'solatyolo',
+  medium: 'solat.yolo',
+  email: 'solat.yolo@gmail.com',
 
   // default notion icon and cover images for site-wide consistency (optional)
   // page-specific values will override these site-wide defaults

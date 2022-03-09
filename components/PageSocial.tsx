@@ -44,7 +44,30 @@ const socialLinks: SocialLink[] = [
         <path d='M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6 0 2.5 1 2.6 2.5 0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z' />
       </svg>
     )
-  }
+  },
+
+  config.medium && {
+    name: 'medium',
+    href: `https://medium.com/@${config.medium}`,
+    title: `Medium @${config.medium}`,
+    icon: (
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+        <path d='M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z'></path>
+      </svg>
+    )
+  },
+
+  config.email &&{
+    name: 'email',
+    href: `mailto:${config.email}`,
+    title: `Gmail`,
+    icon: (
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+        <path d='M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.387l-9 6.463-9-6.463V21H1.5C.649 21 0 20.35 0 19.5v-15c0-.425.162-.8.431-1.068C.7 3.16 1.076 3 1.5 3H2l10 7.25L22 3h.5c.425 0 .8.162 1.069.432.27.268.431.643.431 1.068z'></path>
+      </svg>
+    )
+  },
+
 ].filter(Boolean)
 
 export const PageSocial: React.FC = () => {
