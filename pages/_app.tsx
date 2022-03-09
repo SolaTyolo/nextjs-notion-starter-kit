@@ -37,8 +37,8 @@ import 'prismjs/components/prism-bash'
 import React from 'react'
 import { useRouter } from 'next/router'
 import { bootstrap } from 'lib/bootstrap-client'
-import {  baiduAnalyticsId } from 'lib/config'
-import * as BaiduAnalyClient  from 'api/baidu-analytics'
+import { baiduAnalyticsId } from 'lib/config'
+import * as BaiduAnalyClient from 'api/baidu-analytics'
 
 if (typeof window !== 'undefined') {
   bootstrap()
@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }) {
       BaiduAnalyClient.load(baiduAnalyticsId)
       function onRouteChangeComplete() {
         // Fathom.trackPageview()
-        console.log( "url:", router.asPath)
+        console.log('url:', router.asPath)
       }
       router.events.on('routeChangeComplete', onRouteChangeComplete)
       return () => {
@@ -62,7 +62,5 @@ export default function App({ Component, pageProps }) {
     }
   }, [])
 
-  return (
-      <Component {...pageProps} />
-  )
+  return <Component {...pageProps} />
 }

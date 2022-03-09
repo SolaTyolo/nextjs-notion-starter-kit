@@ -1,5 +1,11 @@
 import * as React from 'react'
-import { FaTwitter, FaGithub, FaLinkedin,FaDev, FaMedium } from 'react-icons/fa'
+import {
+  FaTwitter,
+  FaGithub,
+  FaLinkedin,
+  FaDev,
+  FaMedium
+} from 'react-icons/fa'
 import { IoSunnyOutline, IoMoonSharp } from 'react-icons/io5'
 import * as config from 'lib/config'
 
@@ -26,7 +32,13 @@ export const Footer: React.FC<{
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.copyright}>Copyright 2017-2021 {config.author} © <a href="https://beian.miit.gov.cn/" target='_blank' > {config.icp}</a></div>
+      <div className={styles.copyright}>
+        Copyright 2017-2021 {config.author} ©{' '}
+        <a href='https://beian.miit.gov.cn/' target='_blank'>
+          {' '}
+          {config.icp}
+        </a>
+      </div>
 
       {hasMounted ? (
         <div className={styles.settings}>
