@@ -19,7 +19,7 @@ export async function getAllPagesImpl(
     rootNotionSpaceId,
     notion.getPage.bind(notion),
     {
-      concurrency: 2
+      concurrency: 3
     }
   )
   const canonicalPageMap = Object.keys(pageMap).reduce(
