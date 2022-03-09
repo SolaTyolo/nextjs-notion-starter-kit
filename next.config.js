@@ -2,7 +2,7 @@
 
 module.exports = {
   experimental: {
-    staticPageGenerationTimeout: 60,
+    staticPageGenerationTimeout: 300,
     sharedPool: true
   },
   eslint: {
