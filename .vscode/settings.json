@@ -19,7 +19,7 @@
     "**/bower_components": true,
     "**/.lock-wscript": true,
     "build/Release": true,
-    "**/node_modules/": false,
+    "**/node_modules/": true,
     "**/jspm_packages/": true,
     "**/typings/": true,
     "**/.npm": true,
@@ -27,11 +27,11 @@
     "**/.node_repl_history": true,
     "**/*.tgz": true,
     "**/.yarn-integrity": true,
-    "**/.next/": false,
-    "**/dist/": false,
+    "**/.next/": true,
+    "**/dist/": true,
     "**/build/": true,
     "**/.now/": true,
-    "**/.vercel/": false,
+    "**/.vercel/": true,
     "**/.google.json": true
   }
 }

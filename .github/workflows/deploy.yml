@@ -4,9 +4,27 @@ on:
   push:
     branches:
       - main
+  # allow manual triggervia a buttion in github or a HTTP call
   workflow_dispatch:
+    inputs:
+      customer:
+        description: "Customer to deploy"
+        required: true
 
 jobs:
+  show_customer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Say Hello Customer
+        run: |
+          MANUAL_TRIGGER_CUSTOMER="$"
+          echo "MANUAL_TRIGGER_CUSTOMER: " $MANUAL_TRIGGER_CUSTOMER
+          echo "MANUAL_TRIGGER_CUSTOMER=$MANUAL_TRIGGER_CUSTOMER" >> $GITHUB_ENV
+
+          CUSTOMER_REF_TO_DEPLOY="${MANUAL_TRIGGER_CUSTOMER:-$(cat vercel.json | jq --raw-output '.build.env.NEXT_PUBLIC_CUSTOMER_REF')}"
+          echo "Customer to deploy: " $CUSTOMER_REF_TO_DEPLOY
+          echo "CUSTOMER_REF_TO_DEPLOY=$CUSTOMER_REF_TO_DEPLOY" >> $GITHUB_ENV
   upload2qn:
     runs-on: ubuntu-latest
     steps:
@@ -27,14 +45,16 @@ jobs:
           secret_key: ${{ secrets.QINIU_SK }}
           bucket: ${{ secrets.QINIU_BUCKET }}
           # Default: './'
-          source_dir: "_next/static"
+          source_dir: ".next/static/"
           # Default: '/'
-          dest_dir: "/blog/_next/static"
+          dest_dir: "/blog/_next/static/"
           # Default: true
           ignore_source_map: true
       - name: Deploy to Vercel
-        run: npx vercel --token ${VERCEL_TOKEN} --prod
-        env:
-          VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
-          VERCEL_PROJECT_ID: ${{secrets.VERCEL_PROJECT_ID}}
-          VERCEL_ORG_ID: ${{secrets.VERCEL_ORG_ID}}
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          vercel-args: "--prod"
+          working-directory: ./
