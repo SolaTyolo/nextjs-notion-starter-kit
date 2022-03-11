@@ -1,0 +1,34 @@
+name: Deploy To Vercel
+
+on:
+  push:
+    branches:
+    - master
+  workflow_dispatch:
+
+jobs:
+  upload2qn:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Use Node.js 14
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - name: Installing Packages
+      run: yarn
+    - name: Build Blog
+      run: yarn build && ls -al
+    - name: Upload Artifact  
+      uses: hujiulong/action-qiniu-upload@master
+      with:
+        access_key: ${{ secrets.QINIU_AK }
+        secret_key: ${{ secrets.QINIU_SK }}
+        bucket: ${{ secrets.QINIU_BUCKET }}
+        # Default: './'
+        source_dir: '_next/static'
+        # Default: '/'
+        dest_dir: '/blog/_next/static'
+        # Default: true
+        ignore_source_map: true
