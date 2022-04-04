@@ -3,5 +3,9 @@
     "github": {
         "enabled": false,
         "silent": true
-    }
+    },
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "https://note.cueture.club/$1"
+    }]
 }

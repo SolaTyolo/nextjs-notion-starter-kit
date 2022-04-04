@@ -14,5 +14,5 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true
   },
-  assetPrefix: isProd ? process.env.CDN : ''
+  assetPrefix:  'https://cdn.cueture.club/blog'
 }

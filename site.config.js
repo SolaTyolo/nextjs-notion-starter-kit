@@ -33,7 +33,7 @@ module.exports = {
 
   // image CDN host to proxy all image requests through (optional)
   // NOTE: this requires you to set up an external image proxy
-  imageCDNHost: process.env.CDN,
+  imageCDNHost: process.env.IMAGE_CDN,
 
   // Utteranc.es comments via GitHub issue comments (optional)
   utterancesGitHubRepo: 'SolaTyolo/nextjs-notion-starter-kit',
