@@ -1,5 +1,6 @@
 // const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
-const netBuildId = require('next-build-id')
+var fs = require('fs')
+
 const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
@@ -7,9 +8,11 @@ module.exports = {
     staticPageGenerationTimeout: 300,
     sharedPool: true
   },
+  generateBuildId: async () => {
+    return  fs.readFileSync('./VERSION').toString().trim()
+  },
   eslint: {
     ignoreDuringBuilds: true
   },
-  assetPrefix: isProd ? 'https://cdn.cueture.club/blog' : '',
-  generateBuildId: () => netBuildId({dir: __dirname})
+  assetPrefix: isProd ? process.env.CDN : ''
 }

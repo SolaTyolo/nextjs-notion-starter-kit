@@ -1,6 +1,6 @@
 module.exports = {
   // where it all starts -- the site's root Notion page (required)
-  rootNotionPageId: '779198d2db384e35b84a477a327955d8',
+  rootNotionPageId: 'ed17fee9ce5d44fd9cc04b1858ae903f',
 
   // if you want to restrict pages to a single notion workspace (optional)
   // (this should be a Notion ID; see the docs for how to extract this)
@@ -33,13 +33,13 @@ module.exports = {
 
   // image CDN host to proxy all image requests through (optional)
   // NOTE: this requires you to set up an external image proxy
-  imageCDNHost: null,
+  imageCDNHost: process.env.CDN,
 
   // Utteranc.es comments via GitHub issue comments (optional)
   utterancesGitHubRepo: 'SolaTyolo/nextjs-notion-starter-kit',
 
   //baidu analytics
-  baiduAnalyticsId: '27aa73785891ab409935543eb4f1e1c6',
+  baiduAnalyticsId: process.env.BAIDU_ANALYTICS_ID,
 
   // whether or not to enable support for LQIP preview images (optional)
   // NOTE: this requires you to set up Google Firebase and add the environment
