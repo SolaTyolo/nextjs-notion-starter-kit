@@ -47,6 +47,11 @@ export const mapImageUrl = (imageUrl: string) => {
     return imageUrl
   }
 
+  // start with notion ， return directly
+  if(imageUrl.startsWith('https://www.notion.so/image')) {
+    return imageUrl
+  }
+
   if (imageCDNHost) {
     // Our proxy uses Cloudflare's global CDN to cache these image assets
     return `${imageCDNHost}/${encodeURIComponent(imageUrl)}`
