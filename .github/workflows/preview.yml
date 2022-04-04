@@ -15,6 +15,24 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "14.x"
+      - name: Installing Packages
+        run: yarn
+      - name: Create Build Id
+        run: git rev-parse --short HEAD >> VERSION
+      - name: Build Blog
+        run: yarn build
+      - name: Upload Artifact
+        uses: hujiulong/action-qiniu-upload@master
+        with:
+          access_key: ${{ secrets.QINIU_AK }}
+          secret_key: ${{ secrets.QINIU_SK }}
+          bucket: ${{ secrets.QINIU_BUCKET }}
+          # Default: './'
+          source_dir: ".next/static/"
+          # Default: '/'
+          dest_dir: "/blog/_next/static/"
+          # Default: true
+          ignore_source_map: true
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:

@@ -26,9 +26,7 @@ export async function getAllPagesImpl(
 
   // filter not published posts
   const pageIds = Object.keys(pageMap)
-  await  Promise.all(
-    pageIds.map( id => filterPublishedPosts( pageMap[id] )  )
-  )
+  await Promise.all(pageIds.map((id) => filterPublishedPosts(pageMap[id])))
 
   const canonicalPageMap = Object.keys(pageMap).reduce(
     (map, pageId: string) => {
