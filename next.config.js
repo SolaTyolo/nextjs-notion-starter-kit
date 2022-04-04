@@ -1,5 +1,5 @@
 // const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
-import fs from "fs";
+var fs = require('fs')
 
 const isProd = process.env.NODE_ENV === 'production'
 
