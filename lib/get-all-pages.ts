@@ -5,6 +5,7 @@ import * as types from './types'
 import { includeNotionIdInUrls } from './config'
 import { notion } from './notion'
 import { getCanonicalPageId } from './get-canonical-page-id'
+import { filterPublishedPosts } from './filter-published-posts'
 
 const uuid = !!includeNotionIdInUrls
 
@@ -22,6 +23,13 @@ export async function getAllPagesImpl(
       concurrency: 3
     }
   )
+
+  // filter not published posts
+  const pageIds = Object.keys(pageMap)
+  await  Promise.all(
+    pageIds.map( id => filterPublishedPosts( pageMap[id] )  )
+  )
+
   const canonicalPageMap = Object.keys(pageMap).reduce(
     (map, pageId: string) => {
       const recordMap = pageMap[pageId]

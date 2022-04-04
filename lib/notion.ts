@@ -4,6 +4,7 @@ import { getPreviewImages } from './get-preview-images'
 import { mapNotionImageUrl } from './map-image-url'
 import { fetchTweetAst } from 'static-tweets'
 import pMap from 'p-map'
+import { filterPublishedPosts } from './filter-published-posts'
 
 export const notion = new NotionAPI({
   apiBaseUrl: process.env.NOTION_API_BASE_URL,
@@ -14,6 +15,8 @@ export const notion = new NotionAPI({
 export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
   const recordMap = await notion.getPage(pageId)
   const blockIds = Object.keys(recordMap.block)
+
+  await filterPublishedPosts(recordMap)
 
   const imageUrls: string[] = blockIds
     .map((blockId) => {
