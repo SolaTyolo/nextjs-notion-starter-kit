@@ -1,9 +1,9 @@
 name: Deploy To Vercel
 
 on:
-  pull_request:
+  push:
     branches:
-      - main    
+      - 'feat/**'
 
 jobs:
   show_customer:
@@ -28,27 +28,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "14.x"
-      - name: Installing Packages
-        run: yarn
-      - name: Build Blog
-        run: yarn build
-      - name: Upload Artifact
-        uses: hujiulong/action-qiniu-upload@master
-        with:
-          access_key: ${{ secrets.QINIU_AK }}
-          secret_key: ${{ secrets.QINIU_SK }}
-          bucket: ${{ secrets.QINIU_BUCKET }}
-          # Default: './'
-          source_dir: ".next/static/"
-          # Default: '/'
-          dest_dir: "/blog/_next/static/"
-          # Default: true
-          ignore_source_map: true
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
-          vercel-args: "--prod"
+          vercel-args: ""
           working-directory: './'
