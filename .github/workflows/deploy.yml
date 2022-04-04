@@ -3,7 +3,10 @@ name: Deploy To Vercel
 on:
   push:
     branches:
-      - main
+      - 'feat/**'
+  pull_request:
+    branches:
+      - main    
   # allow manual triggervia a buttion in github or a HTTP call
   workflow_dispatch:
     inputs:
