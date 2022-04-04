@@ -1,7 +1,7 @@
 name: Deploy To Vercel
 
 on:
-  pull_request:
+  push:
     branches:
       - main    
 
