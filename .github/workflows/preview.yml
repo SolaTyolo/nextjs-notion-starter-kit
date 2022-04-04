@@ -6,20 +6,7 @@ on:
       - 'feat/**'
 
 jobs:
-  show_customer:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Say Hello Customer
-        run: |
-          MANUAL_TRIGGER_CUSTOMER="$"
-          echo "MANUAL_TRIGGER_CUSTOMER: " $MANUAL_TRIGGER_CUSTOMER
-          echo "MANUAL_TRIGGER_CUSTOMER=$MANUAL_TRIGGER_CUSTOMER" >> $GITHUB_ENV
-
-          CUSTOMER_REF_TO_DEPLOY="${MANUAL_TRIGGER_CUSTOMER:-$(cat vercel.json | jq --raw-output '.build.env.NEXT_PUBLIC_CUSTOMER_REF')}"
-          echo "Customer to deploy: " $CUSTOMER_REF_TO_DEPLOY
-          echo "CUSTOMER_REF_TO_DEPLOY=$CUSTOMER_REF_TO_DEPLOY" >> $GITHUB_ENV
-  upload2qn:
+  preview:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
