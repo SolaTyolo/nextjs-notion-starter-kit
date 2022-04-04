@@ -37,7 +37,7 @@ jobs:
       - name: Installing Packages
         run: yarn
       - name: Build Blog
-        run: yarn build && ls -al
+        run: yarn build
       - name: Upload Artifact
         uses: hujiulong/action-qiniu-upload@master
         with:
